@@ -1,9 +1,51 @@
-<h1>index HTML</h1>
+{% extends "header.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
 
-<form method="Post" action="">
-Name <input type="text" name="name"/>
-<br>
-Email <input type="Email" name="email"/>
-<br>
-<input type="submit" name="Post">
-</form>
+
+<div class="container">
+	{%if not session['user'] %}
+	<div class="row" style="border-bottom: 1px solid black; border-top: 1px solid black">
+		<div class="col-md-6"> 
+			<h1 style="font-size: 750%">Welcome To Centrale</h1>
+		</div>
+		<div class="col-md-6" style="text-align: right;">	
+
+			<form method="Post" action="" style="margin-right: 10px;border-left: 1px solid black">
+				<h1>SIGN UP</h1>
+				Name <input type="text" name="name" required />
+				<br>
+				Email <input type="Email" name="email" required/>
+				<br>
+				Username <input type="text" name="username" required/>
+				<br>
+				Password <input type="Password" name="password" required/>
+				<br>
+				<input type="submit" name="btn" value="sign-up">
+			</form>
+			<a href="/login">Already Signed Up?</a>
+		</div>
+	</div>
+	{%endif%}
+	<br>
+	<div class="content">
+		<div class="row">
+			{% for post in posts %}
+				<div class="col-md-4  " style="margin-bottom: 10px; text-align: center;">
+					<div   style="border: 1px solid gray;padding: 5px">
+					<img class="img-responsive" src="https://www.w3schools.com/bootstrap/paris.jpg">
+					<h1>{{post[3]}}</h1>
+					<p>{{post[4]}}</p>
+					
+						<h3>Price : {{post[5]}}</h3>
+					<a href="/delete_post/{{post[0]}}"><button>Sold</button></a>
+					 
+					
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

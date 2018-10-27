@@ -1,1 +1,49 @@
-<h1>{{ username }}</h1>
+
+{% extends "header.html" %}
+{% block title %}Profile Page{% endblock %}
+{% block body %}
+{%if session['user'] %}
+<h2>Posts by {{ session['user'] }}</h2>
+<div class="container">
+		<div class="content row"> 
+	{% if Posts %}
+	{%for post in Posts%}
+	
+			<div class="col-md-4  " style="margin-bottom: 10px; text-align: center;">
+				<div   style="border: 1px solid gray;padding: 5px">
+				<img class="img-responsive" src="https://www.w3schools.com/bootstrap/paris.jpg">
+				<h1>{{post[3]}}</h1>
+				<p>{{post[4]}}</p>
+				
+					<h3>Price : {{post[5]}}</h3>
+				<a href="/delete_post/{{post[0]}}"><button>Sold</button></a>
+				 
+				
+			</div>
+			</div>
+	
+	{% endfor %}
+	{% endif %}
+		</div>
+	</div>
+<br>
+<a href="logout">LOGOUT</a>
+<br>
+<a href="post_form">Add POST</a>
+{% else %}
+<h1>  login</h1>
+
+<form method="Post" action="">
+Username <input type="text" name="username"/>
+<br>
+Password <input type="Password" name="password"/>
+<br>
+<input type="submit" name="Post" value="login"/>
+</form>
+{%endif%}
+{% endblock %}
+<!-- <td><img src='{{post[6]}}'> -->
+			<!-- <td>{{post[5]}}</td>
+			<td>{{post[4]}}</td>
+			<td>{{post[3]}}</td>
+		 </tr><br> -->
