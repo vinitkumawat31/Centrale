@@ -161,6 +161,23 @@ def delete_post(post_id):
         return redirect('/')
     return redirect('/profile')
 
+@app.route('/post_details/<post_id>',methods=['GET','POST'])
 
+def post_details(post_id):
+    if 'user' in session:
+        cur = mysql.connection.cursor()
+        username = session['user']
+        cur.execute("SELECT * FROM posts where id = '" + post_id +"'")
+        post = cur.fetchone()
+        post_user = post[1]
+        cur.close()
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * from users where username='" + post_user + "'")
+        user_data = cur.fetchone()
+        return render_template('post_details.html', user = user_data,post = post)
+
+    else:
+        return redirect('/')
+    return render_template('post_details.html')
 if __name__ == '__main__':
     app.run(debug=True)
