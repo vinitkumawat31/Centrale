@@ -1,4 +1,5 @@
 {% extends "header.html" %}
+{% block title %}Post form{% endblock %}
 {% block body %}
 <h1>Post form for {{session['user']}}</h1>
 <form method="Post" action="/post_form" enctype="multipart/form-data">

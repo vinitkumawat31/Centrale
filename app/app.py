@@ -22,9 +22,6 @@ mysql = MySQL(app)
 @app.route('/',methods=['GET','POST'])
 
 def index():
-
-    
-
     if request.method== 'POST' and request.form['btn'] == 'sign-up':     #get form data
         userDetails = request.form
         name = userDetails['name']
@@ -79,6 +76,7 @@ def login():
             return "Username or Password is wrong"
         else:
             session['user'] = username
+            session.permanent = True
             return redirect('/profile')
 
 
@@ -179,5 +177,48 @@ def post_details(post_id):
     else:
         return redirect('/')
     return render_template('post_details.html')
+
+@app.route('/sharing_index',methods=['GET','POST'])
+
+def sharing_index():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT * FROM sharing")
+    if resultValue > 0:
+        sharing = cur.fetchall()
+        return render_template('sharing_index.html', sharing = sharing)
+    return render_template('sharing_index.html')
+         
+
+@app.route('/sharing_form',methods=['GET','POST'])
+
+def sharing_form():
+    if 'user' in session :
+        if request.method == 'POST':
+
+             postDetails = request.form
+             username = session['user']
+             date = postDetails['date']
+             time = postDetails['time']
+             seats = postDetails['seats']
+             source = postDetails['source']
+             destination = postDetails['destination']
+             price = postDetails['price']
+             cur = mysql.connection.cursor()
+             cur.execute("SELECT * from users where username='" + username + "'")
+             row = cur.fetchone()
+             user_id = row[0]
+             cur.close()
+             cur = mysql.connection.cursor()
+             cur.execute("INSERT INTO sharing(username,user_id,date,time,seats,source,destination,price) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)",(username,user_id,date,time,seats,source,destination,price))
+             mysql.connection.commit()
+             cur.close()
+        
+             #return file.filename
+        return render_template('sharing_form.html')        
+    else: 
+        return 'please login'
+        
+
+
 if __name__ == '__main__':
     app.run(debug=True)
