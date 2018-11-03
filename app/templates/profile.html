@@ -1,6 +1,22 @@
 
 {% extends "header.html" %}
 {% block title %}Profile Page{% endblock %}
+{% block bell %}
+	<li><a href="#" id="not"><span class="glyphicon glyphicon-bell"></span> </a></li>
+		
+ {% endblock %}
+ {% block notify %}
+		{% for n in notify%}
+		<div class="row">
+			<div class="col-md-4"><h6>{{n[3]}}</h6></div> 
+			<div class="col-md-6"><h5>{{n[2]}}</h5></div>
+			<div class="col-md-2"> <a href="{{n[4]}}">Visit</a></div>
+		</div>
+		<hr>
+		{% endfor %}
+		<div class="row" style="text-align: center;"><a href="/profile/control"> See All</a></div>
+		
+ {% endblock %}		
 {% block body %}
 {%if session['user'] %}
 
@@ -18,7 +34,7 @@
 				<h1>{{post[3]}}</h1>
 				<p>{{post[4]}}</p>
 				
-					<h3>Price : {{post[5]}}</h3>
+					<h3>Price : <i class="fa fa-rupee"></i> {{post[5]}}</h3>
 					<a href="/post_details/{{post[0]}}"><button>Buy</button></a>
 				<a href="/delete_post/{{post[0]}}"><button>Delete</button></a>
 				 
@@ -27,6 +43,8 @@
 			</div>
 	
 	{% endfor %}
+	{% else %}
+	 <h2>No items posted yet</h2>
 	{% endif %}
 			</div>
 		</div>
@@ -52,17 +70,18 @@
 			
 	
 	{% endfor %}
+	{% else %}
+	<h2>No cab sharing posted yet</h2>
 	{% endif %}
 			</div>
 		</div>
 	</div>
 <br>
-<a href="logout">LOGOUT</a>
-<br>
-<a href="post_form">Add POST</a>
-{% else %}
-<h1>  login</h1>
 
+{% else %}
+
+<div class="container">
+	<h1>  login</h1>
 <form method="Post" action="">
 Username <input type="text" name="username"/>
 <br>
@@ -70,7 +89,24 @@ Password <input type="Password" name="password"/>
 <br>
 <input type="submit" name="Post" value="login"/>
 </form>
+</div>
 {%endif%}
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $("#post_btn").click(function(){
+	        $("#comment_cab").hide();
+	        $("#comment_post").show();
+	    });
+	    $("#cab_btn").click(function(){
+	        $("#comment_cab").show();
+	        $("#comment_post").hide();
+	    });
+	    $("#not").click(function(){
+	    	$("#bell").toggle();
+
+	    });
+});
+</script>
 {% endblock %}
 <!-- <td><img src='{{post[6]}}'> -->
 			<!-- <td>{{post[5]}}</td>

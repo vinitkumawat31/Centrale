@@ -5,16 +5,17 @@
 	<div class="content">
 		<div class="row">
 			<div class="col-md-6" style="border-right: 0px solid black">
-				<img class="img-responsive" src="/static/{{post[6]}}">
+				<img class="img-responsive " src="/static/{{post[6]}}" style="width: 100%;height: auto;max-height: 500px">
 			</div>
 			<div class="col-md-6" style="text-align: center;">
 				<h1>{{post[3]}}</h1>
+			
+				<h3>{{post[4]}}</h3>
+			
+				<h3>Price: <i class="fa fa-rupee"></i> {{post[5]}}</h3>
 				
-				<h2>{{post[4]}}</h2>
-				<br>
-				<h4>Price: {{post[5]}}</h4>
-				<br>
-				<h5>Seller : {{user[3]}}</h5>
+				<h3>Seller : {{user[3]}}</h3>
+				<h5>Uploaded : {{post[8]}}</h5>
 			</div>	
 		</div>
 
@@ -25,13 +26,15 @@
 		<div class="row">
 			<div class="col-md-4">
 				<h3>Name : </h3>
+				<h3>Username : </h3>
 				<h3>Email-Id :</h3>
 				<h3>Phone Number : </h3>  
 			</div>
 			<div class="col-md-4">
 				<h3> {{user[1]}}</h3>
+				<h3> {{user[3]}}</h3>
 				<h3>{{user[2]}}</h3>
-				<h3>9950251130</h3>
+				<h3>{{user[5]}}</h3>
 			</div>
 			<div class="col-md-4"></div>
 		</div>

@@ -4,10 +4,27 @@
 
 
 <div class="container" style="margin-bottom: 20px">
-	
 	<div class="content">
-		<h1>Available Cab Sharing</h1>
+	<div class="row">
+	<div class="col-md-6">
+		<form method="POST">
+				<div class="form-group">
+		      <label>Search By Date:</label>
+		      <input type="date" name="date"required/>
+		      <button type="submit" name="btn" value="search"><i class="fa fa-search"></i></button>
+      </form>
+  </div>
+  	</div>
+  	<div class="col-md-6">
+  		<a href="/sharing_index"><h3>Show all</h3> </a>
+  	</div>
+
+  	</div>
+  		<hr>
+	
+		
 		<div class="row">
+			<h1>Available Cab Sharing {%if date %} on {{date}}{%endif%}</h1>
 			{% for share in sharing %}
 				<div class="col-md-4  " style="margin-bottom: 10px; text-align: center;">
 					<div   style="border: 1px solid gray;padding: 5px">
@@ -22,6 +39,9 @@
 					</div>
 				</div>
 			{% endfor %}
+			{% if not sharing%}
+			<h2>No cab sharing {%if date %} on {{date}}{%endif%} posted on server yet</h2>
+			{%endif%}
 		</div>
 	</div>
 </div>

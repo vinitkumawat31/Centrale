@@ -2,8 +2,27 @@
 {% block title %}Home{% endblock %}
 {% block body %}
 
-
+<div class="col-md-12">
+		<form method="POST">
+		<div class="form-group">
+      <label for="sel1">Search By Category (select one):</label>
+      <select class="form-control" id="sel1" name="category">
+      	<option>All</option>
+        <option>Cars</option>
+        <option>Bikes</option>
+        <option>Electronics</option>
+        <option>Books</option>
+        <option>Decoration</option>
+        <option>Apparels</option>
+        <option>Others</option>
+      </select>
+      <button type="submit" name="btn" value="search"><i class="fa fa-search"></i></button>
+      </form>
+  </div>
 <div class="container" style="margin-bottom: 20px">
+	
+		 
+	</div>
 	{%if not session['user'] %}
 	<div class="row" style="border-bottom: 1px solid black; border-top: 1px solid black">
 		<div class="col-md-6"> 
@@ -16,6 +35,8 @@
 				Name <input type="text" name="name" required />
 				<br>
 				Email <input type="Email" name="email" required/>
+				<br>
+				Phone Number <input type="text" name="phone" required/>
 				<br>
 				Username <input type="text" name="username" required/>
 				<br>
@@ -30,6 +51,13 @@
 	<br>
 	<div class="content">
 		<div class="row">
+			<div class="col-md-12" style="text-align: center;">
+			{% if category %}
+			<h2>Showing category {{category}}</h2>
+			{%else %}
+			<h2>No Category selected</h2>
+			{%endif%}
+			</div>
 			{% for post in posts %}
 				<div class="col-md-4  " style="margin-bottom: 10px; text-align: center;">
 					<div   style="border: 1px solid gray;padding: 0px">
@@ -44,6 +72,9 @@
 					</div>
 				</div>
 			{% endfor %}
+			{% if not posts%}
+			<h2>No items posted on server yet</h2>
+			{%endif%}
 		</div>
 	</div>
 </div>
