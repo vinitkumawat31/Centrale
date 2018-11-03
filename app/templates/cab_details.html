@@ -1,26 +1,27 @@
 {% extends "header.html" %}
-{% block title %}Post Details{% endblock %}
+{% block title %}Cab Details{% endblock %}
 {% block body %}
 <div class="container" style="margin-bottom: 20px">
 	<div class="content">
 		<div class="row">
-			<div class="col-md-6" style="border-right: 0px solid black">
-				<img class="img-responsive" src="/static/{{post[6]}}">
-			</div>
-			<div class="col-md-6" style="text-align: center;">
-				<h1>{{post[3]}}</h1>
+		
+			<div class="col-md-6" style="text-align: left;">
+				<h1>{{cab[6]}} to {{cab[7]}}</h1>
 				
-				<h2>{{post[4]}}</h2>
-				<br>
-				<h4>Price: {{post[5]}}</h4>
-				<br>
-				<h5>Seller : {{user[3]}}</h5>
+				</div>
+				<div class="col-md-6"><h3>Date : {{cab[3]}}</h3>
+					<h3>Time : {{cab[4]}}</h3>
+				</div>
+				
+				<div class="col-md-6"> <h3>Seats Available : {{cab[5]}}</h3></div>
+				<div class="col-md-6"><h3>Price : <i class="fa fa-rupee"></i> {{cab[8]}}</h3></div>
+					
 			</div>	
 		</div>
 
 	</div>
 	<hr>
-	<div class="content">
+	<div class="content"  >
 		<h2>Contact Details</h2>
 		<div class="row">
 			<div class="col-md-4">
@@ -36,7 +37,8 @@
 			<div class="col-md-4"></div>
 		</div>
 	</div>
-	<div class="content">
+	<hr>
+	<div class="content" style="padding: 10px" >
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Leave a Reply</h1>
